@@ -1,15 +1,22 @@
 import mongoose from "mongoose"
 
-const MONGODB_URI = process.env.MONGODB_URI
+const MONGODB_URI = process.env.MONGODB_URI as string
 
 if (!MONGODB_URI) {
   throw new Error("Please define MONGODB_URI in environment variables")
 }
 
-let cached = global.mongoose
+declare global {
+  var _mongoose: {
+    conn: typeof mongoose | null
+    promise: Promise<typeof mongoose> | null
+  }
+}
+
+let cached = global._mongoose
 
 if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null }
+  cached = global._mongoose = { conn: null, promise: null }
 }
 
 export async function connectDB() {
