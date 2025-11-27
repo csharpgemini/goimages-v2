@@ -2,9 +2,14 @@ import { connectDB } from "@/lib/mongodb"
 import Image from "@/models/Image"
 import { type NextRequest, NextResponse } from "next/server"
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(
+  request: NextRequest,
+  props: { params: Promise<{ id: string }> }
+) {
   try {
+    const params = await props.params; // Await the params promise
     await connectDB()
+    
     const result = await Image.findByIdAndDelete(params.id)
 
     if (!result) {
