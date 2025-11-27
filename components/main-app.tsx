@@ -66,7 +66,7 @@ export default function MainApp({ socket }: MainAppProps) {
       <div className="max-w-6xl mx-auto px-4 py-12">
         {/* Header */}
         <div className="mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Image Gallery</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Go Images</h1>
           <p className="text-zinc-400">Upload images via URL or from your device</p>
         </div>
 
